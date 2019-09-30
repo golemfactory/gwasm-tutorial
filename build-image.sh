@@ -1,7 +1,8 @@
 IMAGE_TAG=$1
 
 # Create directory for repositories
-mkdir -p repos/
+rm -r -f repos/
+mkdir repos/
 cd repos/
 
 # Clone private repositories.
