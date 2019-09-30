@@ -1,5 +1,5 @@
 FROM debian:stable
-RUN apt-get update && apt-get install -y build-essential curl gcc git python libxml2 cmake vim
+RUN apt-get update && apt-get install -y build-essential curl gcc git python libxml2 cmake vim nano
 
 # Install Rust
 ENV RUSTUP_HOME=/opt/rust
@@ -28,7 +28,6 @@ RUN cd /root/hello-gwasm-runner/ && cargo build --release && cargo clean
 RUN cd /root && git clone https://github.com/golemfactory/mandelbrot.git
 RUN cd /root/mandelbrot && cargo build --release && cargo clean
 
-# Install gudot
 # Install gudot
 COPY repos/gudot/ /root/gudot/
 RUN cd /root/gudot/ && cargo build --release && cargo clean
