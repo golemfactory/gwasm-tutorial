@@ -1,5 +1,5 @@
 FROM debian:stable
-RUN apt-get update && apt-get install -y build-essential curl gcc git python libxml2 cmake vim nano
+RUN apt-get update && apt-get install -y build-essential curl gcc git python libxml2
 
 # Install Rust
 ENV RUSTUP_HOME=/opt/rust
@@ -17,8 +17,10 @@ ENV EMSDK=/opt/emsdk
 ENV PATH=$PATH:/opt/emsdk
 RUN emsdk activate latest
 
-
 ENV PATH=$PATH:/opt/emsdk/fastcomp/emscripten:/opt/emsdk/node/8.9.1_64bit/bin
+
+# Install dependencies for examples
+RUN apt-get install -y pkg-config libfreetype6-dev libexpat1-dev cmake vim nano
 
 # Install hello example
 COPY repos/hello-gwasm-runner/ /root/hello-gwasm-runner/
