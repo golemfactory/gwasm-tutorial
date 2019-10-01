@@ -13,4 +13,5 @@ cd repos/
 
 # Build docker image
 cd ../
-docker build -t golemfactory/gwasm-tutorial:$IMAGE_TAG .
+docker build --target=lightweight -t golemfactory/gwasm-tutorial:$IMAGE_TAG .
+docker build --target=presenter -t golemfactory/gwasm-tutorial:$IMAGE_TAG-presenter .
