@@ -8,5 +8,8 @@ set -e      # Fail if any command fails
 docker push $IMAGE_DOCKERHUB_NAME:$IMAGE_TAG
 
 # Deploy 
+echo "Deploy to internal registry t1."
 ./deploy-single-server.sh witek@10.30.8.246 30322 $IMAGE_TAG
+
+echo "Deploy to public registry."
 ./deploy-single-server.sh ubuntu@52.31.143.91 22 $IMAGE_TAG
