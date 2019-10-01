@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y build-essential curl gcc git python lib
 # Install Rust
 ENV RUSTUP_HOME=/opt/rust
 ENV CARGO_HOME=/opt/cargo
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && \
+    rm -r /opt/rust/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/
 ENV PATH=$PATH:/opt/cargo/bin
 
 # Install emscripten
@@ -12,7 +13,9 @@ RUN rustup target add wasm32-unknown-emscripten
 RUN cd /opt && \
 	git clone https://github.com/emscripten-core/emsdk.git &&  \
 	cd emsdk && \
-	/opt/emsdk/emsdk install latest
+	/opt/emsdk/emsdk install latest && \
+    rm -r /opt/emsdk/fastcomp/emscripten/tests/
+
 ENV EMSDK=/opt/emsdk
 ENV PATH=$PATH:/opt/emsdk
 RUN emsdk activate latest
