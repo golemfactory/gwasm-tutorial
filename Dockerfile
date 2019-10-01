@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:stable as lightweight
 RUN apt-get update && apt-get install -y build-essential curl gcc git python libxml2
 
 # Install Rust
@@ -55,4 +55,14 @@ RUN cd /root/hello-gwasm-runner
 WORKDIR /root/hello-gwasm-runner
 ENV GU_HUB_ADDR=172.30.30.22:61622
 ENV CARGO_NET_OFFLINE=true
+
+
+# Build image for presenter
+FROM lightweight as presenter
+
+RUN cd /root/hello-gwasm-runner/ && cargo build --release
+RUN cd /root/mandelbrot && cargo build --release
+RUN cd /root/gudot/ && cargo build --release
+RUN cd /root/key_cracker_demo/ && cargo build --release
+RUN cd /root/key_cracker_gen/ && cargo build --release
 
