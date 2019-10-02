@@ -39,8 +39,8 @@ COPY repos/gudot/ /root/gudot/
 RUN cd /root/gudot/ && cargo build --release && cargo clean
 
 # Install rust key crackers
-COPY repos/key_cracker_demo/ /root/key_cracker_demo/
-RUN cd /root/key_cracker_demo/ && cargo build --release && cargo clean
+COPY repos/key_cracker_rust/ /root/key_cracker_rust/
+RUN cd /root/key_cracker_rust/ && cargo build --release && cargo clean
 
 # Install c++ key crackers
 COPY repos/key_cracker_cpp/ /root/key_cracker_cpp/
@@ -70,5 +70,5 @@ FROM lightweight as presenter
 RUN cd /root/hello-gwasm-runner/ && cargo build --release
 RUN cd /root/mandelbrot && cargo build --release
 RUN cd /root/gudot/ && cargo build --release
-RUN cd /root/key_cracker_demo/ && cargo build --release
+RUN cd /root/key_cracker_rust/ && cargo build --release
 
