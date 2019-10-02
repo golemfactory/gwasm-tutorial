@@ -8,7 +8,7 @@ cd repos/
 ./../prepare-git-repo.sh hello-gwasm-runner
 ./../prepare-git-repo.sh gudot
 ./../prepare-git-repo.sh key_cracker_cpp
-./../prepare-git-repo.sh key_cracker_demo
+./../prepare-git-repo.sh key_cracker_rust
 
 # Build docker image
 cd ../
