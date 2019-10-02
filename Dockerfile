@@ -14,7 +14,8 @@ RUN cd /opt && \
 	git clone https://github.com/emscripten-core/emsdk.git &&  \
 	cd emsdk && \
 	/opt/emsdk/emsdk install latest && \
-    rm -r /opt/emsdk/fastcomp/emscripten/tests/
+    rm -r /opt/emsdk/fastcomp/emscripten/tests/ && \
+    rm -r /opt/emsdk/.git
 
 ENV EMSDK=/opt/emsdk
 ENV PATH=$PATH:/opt/emsdk
@@ -23,7 +24,7 @@ RUN emsdk activate latest
 ENV PATH=$PATH:/opt/emsdk/fastcomp/emscripten:/opt/emsdk/node/8.9.1_64bit/bin
 
 # Install dependencies for examples
-RUN apt-get install -y pkg-config libfreetype6-dev libexpat1-dev cmake vim nano
+RUN apt-get install -y pkg-config libfreetype6-dev libexpat1-dev cmake vim nano libfontconfig1-dev
 
 # Install hello example
 COPY repos/hello-gwasm-runner/ /root/hello-gwasm-runner/
@@ -39,9 +40,7 @@ RUN cd /root/gudot/ && cargo build --release && cargo clean
 
 # Install rust key crackers
 COPY repos/key_cracker_demo/ /root/key_cracker_demo/
-COPY repos/key_cracker_gen/ /root/key_cracker_gen/
 RUN cd /root/key_cracker_demo/ && cargo build --release && cargo clean
-RUN cd /root/key_cracker_gen/ && cargo build --release && cargo clean
 
 # Install c++ key crackers
 COPY repos/key_cracker_cpp/ /root/key_cracker_cpp/
@@ -59,6 +58,11 @@ WORKDIR /root/hello-gwasm-runner
 ENV GU_HUB_ADDR=172.30.30.22:61622
 ENV CARGO_NET_OFFLINE=true
 
+# Add welcome message
+COPY welcome-message.txt /root/welcome-message.txt
+RUN echo 'cat /root/welcome-message.txt' >> /etc/bash.bashrc
+
+
 
 # Build image for presenter
 FROM lightweight as presenter
@@ -67,5 +71,4 @@ RUN cd /root/hello-gwasm-runner/ && cargo build --release
 RUN cd /root/mandelbrot && cargo build --release
 RUN cd /root/gudot/ && cargo build --release
 RUN cd /root/key_cracker_demo/ && cargo build --release
-RUN cd /root/key_cracker_gen/ && cargo build --release
 
