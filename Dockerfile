@@ -48,7 +48,7 @@ RUN cd /root/key_cracker_cpp/ && \
     mkdir -p build && \
     cd build && \
     emconfigure cmake .. && \
-    make
+    make -j4
 
 # Install gwasm-runner
 RUN curl -L -o /usr/bin/gwasm-runner https://github.com/golemfactory/gwasm-runner/releases/download/0.2.0/gwasm-runner-linux-amd64 && chmod +x /usr/bin/gwasm-runner
