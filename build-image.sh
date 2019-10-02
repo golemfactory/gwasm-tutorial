@@ -9,7 +9,6 @@ cd repos/
 ./../prepare-git-repo.sh gudot
 ./../prepare-git-repo.sh key_cracker_cpp
 ./../prepare-git-repo.sh key_cracker_demo
-./../prepare-git-repo.sh key_cracker_gen
 
 # Build docker image
 cd ../
