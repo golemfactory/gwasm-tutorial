@@ -2,10 +2,11 @@ source ./deploy-names.sh $1
 set -e      # Fail if any command fails
 
 # Build image
-./build-image.sh $IMAGE_TAG
+#./build-image.sh $IMAGE_TAG
 
 # Push image to dockerhub. Other machines will access image from there.
 docker push $IMAGE_DOCKERHUB_NAME:$IMAGE_TAG
+docker push $IMAGE_DOCKERHUB_NAME:$IMAGE_TAG-full
 
 # Deploy 
 echo "Deploy to internal registry t1."
