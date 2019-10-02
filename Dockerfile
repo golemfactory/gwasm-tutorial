@@ -4,20 +4,16 @@ RUN apt-get update && apt-get install -y build-essential curl gcc git python lib
 # Install Rust
 ENV RUSTUP_HOME=/opt/rust
 ENV CARGO_HOME=/opt/cargo
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y && /opt/cargo/bin/rustup target add wasm32-unknown-emscripten
 ENV PATH=$PATH:/opt/cargo/bin
 
 # Install emscripten
-RUN rustup target add wasm32-unknown-emscripten
 RUN cd /opt && \
 	git clone https://github.com/emscripten-core/emsdk.git &&  \
 	cd emsdk && \
-	/opt/emsdk/emsdk install latest
+	/opt/emsdk/emsdk install latest && /opt/emsdk/emsdk activate latest
 ENV EMSDK=/opt/emsdk
 ENV PATH=$PATH:/opt/emsdk
-RUN emsdk activate latest
-
-
 ENV PATH=$PATH:/opt/emsdk/fastcomp/emscripten:/opt/emsdk/node/8.9.1_64bit/bin
 
 # Install hello example
