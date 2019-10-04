@@ -1,2 +1,8 @@
+build-image.sh
+deploy-images.sh
+deploy-names.sh
+deploy-single-server.sh
+dirs-to-remove.txt
+prepare-git-repos.sh
 .git
 
