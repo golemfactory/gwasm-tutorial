@@ -5,13 +5,12 @@ mkdir -p repos/
 cd repos/
 
 # Clone private repositories.
-git clone git@github.com:golemfactory/hello-gwasm-runner.git
-git clone git@github.com:golemfactory/gudot.git
-git clone git@github.com:golemfactory/key_cracker_cpp.git
-git clone git@github.com:golemfactory/key_cracker_demo.git
-git clone git@github.com:golemfactory/key_cracker_gen.git
-#git clone https://github.com/golemfactory/gwasm-runner.git
+./../prepare-git-repo.sh hello-gwasm-runner
+./../prepare-git-repo.sh gudot
+./../prepare-git-repo.sh key_cracker_cpp
+./../prepare-git-repo.sh key_cracker_rust
 
 # Build docker image
 cd ../
-docker build -t golemfactory/gwasm-tutorial:$IMAGE_TAG .
+docker build --target=lightweight -t golemfactory/gwasm-tutorial:$IMAGE_TAG .
+docker build --target=presenter -t golemfactory/gwasm-tutorial:$IMAGE_TAG-full .

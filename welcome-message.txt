@@ -1,0 +1,20 @@
+Great that you’re here!
+
+This is a toolset for the Golem workshop at deVcon, Osaka, Japan.
+https://devcon.golem.network
+Building on top of Golem with gWasm and Unlimited
+
+You’ll find here:
+- gcc
+- emscripten sdk
+- rust (with wasm32-unknown-emscripten target)
+- python2, curl, vim and nano
+- gwasm-runner (use -h to get help)
+
+We had also prepared four examples for you:
+  - hello world for gwasm runner (you’re now in its directory)
+  - mandelbrot fractal example (~/mandelbrot) 
+  - fully homomorphic encryption example (~/gudot)
+  - easter egg: cracking challenge implemented in both Rust and C++ 
+
+All of those can be compiled to WASM target and executed with gwasm-runner.
