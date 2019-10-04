@@ -1,5 +1,5 @@
 FROM debian:stable as lightweight
-RUN apt-get update && apt-get install -y build-essential curl gcc git python libxml2
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential curl gcc git python libxml2 ca-certificates
 
 # Install Rust
 ENV RUSTUP_HOME=/opt/rust
@@ -40,7 +40,7 @@ RUN cd /root/gudot/ && cargo build --release && cargo clean
 
 # Install rust key crackers
 COPY repos/key_cracker_rust/ /root/key_cracker_rust/
-RUN cd /root/key_cracker_rust/ && cargo build --release && cargo clean
+RUN cd /root/key_cracker_rust/ && cargo update && cargo build --release && cargo clean
 
 # Install c++ key crackers
 COPY repos/key_cracker_cpp/ /root/key_cracker_cpp/
